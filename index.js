@@ -5,7 +5,7 @@ let steps = 0;
 
 const interval = setInterval(() => {
     if (steps < TIMES) {
-        robot.keyTap('f5');
+        robot.keyTap('fn', 'f5');
         console.log('tapped');
         steps++;
     }
