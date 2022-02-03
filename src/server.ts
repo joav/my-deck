@@ -8,7 +8,7 @@ import expressWinston from 'express-winston';
 import { router } from "./routes";
 import { InMemoryBoardRepository } from "./implementations/in-memory/board.repository";
 import { registerMultipleServices } from "@services/services";
-// import cors from "cors";
+import cors from "cors";
 // import db from './db';
 // import schema from './schema';
 // import Auth from './Auth'
@@ -25,8 +25,15 @@ registerMultipleServices([
     }
 ]);
 
+const allowedOrigins = [
+    'http://localhost:3001',
+    'http://localhost:3002',
+];
+
 const app = express();
-// app.use('*', cors());
+app.use(cors({
+    origin: allowedOrigins
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(compression());
