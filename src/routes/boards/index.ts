@@ -1,6 +1,6 @@
 import { BoardRepository } from "@interfaces/board.repository";
 import { NotFoundError } from "@models/errors/not-found.error";
-import { createBoard, getAllBoards, getBoard, setBoardSlot } from "@services/boards";
+import { createBoard, getAllBoards, getBoard, setBoardSlot, updateBoard } from "@services/boards";
 import { getService } from "@services/services";
 import { Router } from "express";
 
@@ -30,6 +30,21 @@ boardsRouter.get('/:boardId', async (req, res) => {
         res.json(board);
     } else {
         res.status(404).json({code: 404, errorMessage: "Board not found"});
+    }
+});
+
+// Update a board
+boardsRouter.put('/:boardId', async (req, res) => {
+    try {
+        const boardRepository = getBoardRepository();
+        const board = await updateBoard(boardRepository, req.params.boardId, req.body.name);
+        res.json(board);
+    } catch (error) {
+        if (error instanceof NotFoundError) {
+            res.status(404).json({code: 404, errorMessage: error.message});
+        } else {
+            res.status(500).json({code: 500, errorMessage: (error as any).message || "Internal server error"});
+        }
     }
 });
 

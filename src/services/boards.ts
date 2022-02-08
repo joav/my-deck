@@ -16,6 +16,10 @@ export async function getBoard(boardRepository: BoardRepository, boardId: string
     return boardRepository.get(boardId);
 }
 
+export async function updateBoard(boardRepository: BoardRepository, boardId: string, name: string) {
+    return boardRepository.updateBoard(boardId, name);
+}
+
 export async function setBoardSlot(boardRepository: BoardRepository, boardId: string, slotId: string, button: Button) {
     const slot: Slot = {
         state: button?'FULL':'EMPTY',

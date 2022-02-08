@@ -25,6 +25,16 @@ export class InMemoryBoardRepository implements BoardRepository {
         return board;
     }
 
+    async updateBoard(boardId: string, name: string) {
+        const board = await this.get(boardId);
+
+        if (!board) throw new BoardNotFoundError();
+
+        board.name = name;
+
+        return board;
+    }
+
     async setSlot(boardId: string, slotId: string, slot: Slot) {
         const board = await this.get(boardId);
 
