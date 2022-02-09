@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "server/",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@models/*": ["src/models/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@services/*": ["src/services/*"],
+      "@utils/*": ["src/utils/*"]
+    },
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

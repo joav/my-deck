@@ -19,7 +19,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
-    "build": "tsc"
+    "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./server && npm run cp-commands",
+    "cp-commands": "cp-cli ./src/commands/commands.json ./server/commands/commands.json",
+    "install-module": "ts-node --project ./tsconfig.json -r tsconfig-paths/register"
   },
   "author": "",
   "license": "ISC",
@@ -39,9 +41,11 @@
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.13",
     "@types/uniqid": "^5.3.2",
+    "cp-cli": "^2.0.0",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
+    "tscpaths": "0.0.9",
     "tslint": "^6.1.3",
     "typescript": "^4.5.5"
   }

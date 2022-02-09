@@ -3,10 +3,11 @@ import { Board, Slot } from "@models/board";
 import { BoardNotFoundError } from "@models/errors/board-not-found.error";
 import { SlotNotFoundError } from "@models/errors/slot-not-found.error";
 import { emptyBoard } from "@utils/empty-board";
+import { ROOT_ID } from "@utils/root-id";
 
 
 const boards: Board[] = [
-    emptyBoard('Inicial', '2zf96xcggkz2ps4ev')
+    emptyBoard('Inicial', ROOT_ID)
 ];
 
 export class InMemoryBoardRepository implements BoardRepository {

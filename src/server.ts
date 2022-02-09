@@ -9,6 +9,7 @@ import { router } from "./routes";
 import { InMemoryBoardRepository } from "./implementations/in-memory/board.repository";
 import { registerMultipleServices } from "@services/services";
 import cors from "cors";
+import { InMemoryContextRepository } from "./implementations/in-memory/context.repository";
 // import db from './db';
 // import schema from './schema';
 // import Auth from './Auth'
@@ -22,7 +23,11 @@ registerMultipleServices([
     {
         key: 'board',
         service: new InMemoryBoardRepository()
-    }
+    },
+    {
+        key: 'context',
+        service: new InMemoryContextRepository()
+    },
 ]);
 
 const allowedOrigins = [
