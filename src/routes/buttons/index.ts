@@ -49,7 +49,7 @@ buttonsRouter.put('/:buttonId', async (req, res) => {
 });
 
 // Delete a button
-buttonsRouter.put('/:buttonId', async (req, res) => {
+buttonsRouter.delete('/:buttonId', async (req, res) => {
     try {
         const buttonRepository = getButtonRepository();
         await deleteButton(buttonRepository, req.body);
