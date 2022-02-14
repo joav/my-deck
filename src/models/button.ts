@@ -6,6 +6,7 @@ export type Action = {
 }
 
 export interface Button {
+    id?: string;
     name: string;
     icon: string;
     color: string;

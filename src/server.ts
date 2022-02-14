@@ -10,6 +10,7 @@ import { InMemoryBoardRepository } from "./implementations/in-memory/board.repos
 import { registerMultipleServices } from "@services/services";
 import cors from "cors";
 import { InMemoryContextRepository } from "./implementations/in-memory/context.repository";
+import { InMemoryButtonRepository } from "./implementations/in-memory/button.repository";
 // import db from './db';
 // import schema from './schema';
 // import Auth from './Auth'
@@ -27,6 +28,10 @@ registerMultipleServices([
     {
         key: 'context',
         service: new InMemoryContextRepository()
+    },
+    {
+        key: 'button',
+        service: new InMemoryButtonRepository()
     },
 ]);
 
