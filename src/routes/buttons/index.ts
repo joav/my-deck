@@ -52,7 +52,7 @@ buttonsRouter.put('/:buttonId', async (req, res) => {
 buttonsRouter.delete('/:buttonId', async (req, res) => {
     try {
         const buttonRepository = getButtonRepository();
-        await deleteButton(buttonRepository, req.body);
+        await deleteButton(buttonRepository, req.params.buttonId);
         res.json({code: 200, message: "OK"});
     } catch (error) {
         if (error instanceof NotFoundError) {
