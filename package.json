@@ -19,9 +19,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
-    "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./server && npm run cp-commands",
+    "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./server && npm run cp-commands && npm run cp-db",
     "cp-commands": "cp-cli ./src/commands/commands.json ./server/commands/commands.json",
-    "cp-db": "cp-cli ./src/commands/commands.json ./server/commands/commands.json",
+    "cp-db": "cp-cli ./src/infrastructure/sqlite/my-deck.db ./server/infrastructure/sqlite/my-deck.db",
     "install-module": "ts-node --project ./tsconfig.json -r tsconfig-paths/register"
   },
   "author": "",
