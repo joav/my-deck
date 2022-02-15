@@ -10,9 +10,10 @@ import { router } from "./routes";
 import { registerMultipleServices, registerService } from "@services/services";
 import cors from "cors";
 import { InMemoryContextRepository } from "./implementations/in-memory/context.repository";
-import { InMemoryButtonRepository } from "./implementations/in-memory/button.repository";
+// import { InMemoryButtonRepository } from "./implementations/in-memory/button.repository";
 import { db } from "./infrastructure/sqlite/db";
 import { SqliteBoardRepository } from "./implementations/persitence/sqlite/board.repository";
+import { SqliteButtonRepository } from "./implementations/persitence/sqlite/button.repository";
 // import db from './db';
 // import schema from './schema';
 // import Auth from './Auth'
@@ -35,7 +36,7 @@ registerMultipleServices([
     },
     {
         key: 'button',
-        service: new InMemoryButtonRepository()
+        service: new SqliteButtonRepository()
     },
 ]);
 
