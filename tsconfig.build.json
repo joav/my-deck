@@ -10,7 +10,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
-      "@commands/*": ["src/commands/*"]
+      "@commands/*": ["src/commands/*"],
+      "@infrastructure/*": ["src/infrastructure/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,

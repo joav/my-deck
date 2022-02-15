@@ -21,6 +21,7 @@
     "dev": "nodemon",
     "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./server && npm run cp-commands",
     "cp-commands": "cp-cli ./src/commands/commands.json ./server/commands/commands.json",
+    "cp-db": "cp-cli ./src/commands/commands.json ./server/commands/commands.json",
     "install-module": "ts-node --project ./tsconfig.json -r tsconfig-paths/register"
   },
   "author": "",
@@ -32,6 +33,7 @@
     "express-winston": "^4.2.0",
     "node-key-sender": "^1.0.11",
     "robotjs": "^0.6.0",
+    "sqlite3": "^5.0.2",
     "uniqid": "^5.4.0",
     "winston": "^3.5.1"
   },
@@ -40,6 +42,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.13",
+    "@types/sqlite3": "^3.1.8",
     "@types/uniqid": "^5.3.2",
     "cp-cli": "^2.0.0",
     "nodemon": "^2.0.15",

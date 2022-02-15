@@ -6,11 +6,13 @@ import compression from 'compression';
 import winston from 'winston';
 import expressWinston from 'express-winston';
 import { router } from "./routes";
-import { InMemoryBoardRepository } from "./implementations/in-memory/board.repository";
-import { registerMultipleServices } from "@services/services";
+// import { InMemoryBoardRepository } from "./implementations/in-memory/board.repository";
+import { registerMultipleServices, registerService } from "@services/services";
 import cors from "cors";
 import { InMemoryContextRepository } from "./implementations/in-memory/context.repository";
 import { InMemoryButtonRepository } from "./implementations/in-memory/button.repository";
+import { db } from "./infrastructure/sqlite/db";
+import { SqliteBoardRepository } from "./implementations/persitence/sqlite/board.repository";
 // import db from './db';
 // import schema from './schema';
 // import Auth from './Auth'
@@ -20,10 +22,12 @@ const PORT = process.env.PORT || 3000;
 // config();
 // db();
 
+registerService('sqlite', db);
+
 registerMultipleServices([
     {
         key: 'board',
-        service: new InMemoryBoardRepository()
+        service: new SqliteBoardRepository()
     },
     {
         key: 'context',
