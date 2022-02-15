@@ -9,11 +9,12 @@ import { router } from "./routes";
 // import { InMemoryBoardRepository } from "./implementations/in-memory/board.repository";
 import { registerMultipleServices, registerService } from "@services/services";
 import cors from "cors";
-import { InMemoryContextRepository } from "./implementations/in-memory/context.repository";
+// import { InMemoryContextRepository } from "./implementations/in-memory/context.repository";
 // import { InMemoryButtonRepository } from "./implementations/in-memory/button.repository";
 import { db } from "./infrastructure/sqlite/db";
 import { SqliteBoardRepository } from "./implementations/persitence/sqlite/board.repository";
 import { SqliteButtonRepository } from "./implementations/persitence/sqlite/button.repository";
+import { SqliteContextRepository } from "./implementations/persitence/sqlite/context.repository";
 // import db from './db';
 // import schema from './schema';
 // import Auth from './Auth'
@@ -32,7 +33,7 @@ registerMultipleServices([
     },
     {
         key: 'context',
-        service: new InMemoryContextRepository()
+        service: new SqliteContextRepository()
     },
     {
         key: 'button',
