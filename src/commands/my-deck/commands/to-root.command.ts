@@ -20,3 +20,7 @@ export class ToRootCommand extends BaseCommand {
         ]);
     }
 }
+
+export function getInstance() {
+    return new ToRootCommand();
+}

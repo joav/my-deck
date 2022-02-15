@@ -24,3 +24,7 @@ export class DelayCommand extends BaseCommand {
         return new Promise((r) => setTimeout(r, +delay));
     }
 }
+
+export function getInstance() {
+    return new DelayCommand();
+}

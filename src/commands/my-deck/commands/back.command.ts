@@ -25,3 +25,7 @@ export class BackCommand extends BaseCommand {
         ]);
     }
 }
+
+export function getInstance() {
+    return new BackCommand();
+}

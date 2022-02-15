@@ -1,7 +1,9 @@
 import { Command } from "@models/command";
 import { CommandsData } from "@models/commands-data";
+import { CommandNotFoundError } from "@models/errors/command-not-found.error";
 import { Group } from "@models/group";
 import path from "path";
+import { BaseCommand } from "../shared/base.command";
 import { getJsonFile, setJsonFile } from "./files-functions";
 
 const COMMANDS_DIR = path.resolve(__dirname, '../commands.json');
@@ -59,6 +61,16 @@ export class CommandsService {
             if (command.showCommand && !data.groups[groupsIndex].commandsToShow.includes(command.id)) {
                 data.groups[groupsIndex].commandsToShow.push(command.id);
             }
+        }
+    }
+
+    static async getCommand(groupId: string, commandId: string): Promise<BaseCommand> {
+        try {
+            const {getInstance} = require(__dirname+`/../${groupId}/commands/${commandId}.command`);
+            return getInstance();
+        } catch (error) {
+            throw new CommandNotFoundError();
+            
         }
     }
 }

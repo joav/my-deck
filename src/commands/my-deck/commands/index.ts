@@ -1,4 +1,4 @@
-import { BaseCommand } from "src/commands/shared/base.command";
+import { BaseCommand } from "@commands/shared/base.command";
 import { BackCommand } from "./back.command";
 import { DelayCommand } from "./delay.command";
 import { ToRootCommand } from "./to-root.command";
