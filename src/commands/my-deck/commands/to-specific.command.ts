@@ -1,7 +1,7 @@
 import { BoardRepository } from "@interfaces/board.repository";
 import { ContextRepository } from "@interfaces/context.repository";
-import { Board } from "@models/board";
 import { Command } from "@models/command";
+import { ParamsData } from "@models/params-data";
 import { getService } from "@services/services";
 import { ROOT_ID } from "@utils/root-id";
 import { BaseCommand } from "../../shared/base.command";
@@ -40,11 +40,11 @@ export class ToSpecificCommand extends BaseCommand {
         ]);
     }
 
-    async getData() {
+    async getData(): Promise<ParamsData> {
         const boardRepository = getService<BoardRepository>('board');
         const boards = await boardRepository.getAll();
 
-        return boards.map(b => ({id: b.id, name: b.name}));
+        return {boardId: boards.map(b => ({id: b.id, name: b.name}))};
     }
 }
 
