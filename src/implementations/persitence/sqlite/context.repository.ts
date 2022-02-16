@@ -40,6 +40,6 @@ export class SqliteContextRepository implements ContextRepository {
 
     async getFromJson<T = any>(key: string): Promise<T> {
         const value = await this.get(key);
-        return JSON.parse(value || "");
+        return JSON.parse(value || '""');
     }
 }

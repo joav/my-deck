@@ -31,6 +31,15 @@ export async function setBoardSlot(boardRepository: BoardRepository, boardId: st
     return boardRepository.setSlot(boardId, slotId, slot);
 }
 
+export async function setSlotState(boardRepository: BoardRepository, boardId: string, slotId: string, button: Button, state: 'FULL' | 'EXECUTING') {
+    const slot: Slot = {
+        state,
+        button
+    };
+
+    return boardRepository.setSlot(boardId, slotId, slot);
+}
+
 export async function getCurrentBoard(contextRepository: ContextRepository, boardRepository: BoardRepository) {
     const context = new MyDeckContext(contextRepository);
     const currentBoardId = await context.getCurrentBoard();

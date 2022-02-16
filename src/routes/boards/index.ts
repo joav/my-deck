@@ -1,25 +1,13 @@
-import { MyDeckContext } from "@commands/my-deck/context";
 import { BoardRepository } from "@interfaces/board.repository";
-import { ContextRepository } from "@interfaces/context.repository";
-import { Board } from "@models/board";
 import { NotFoundError } from "@models/errors/not-found.error";
 import { createBoard, getAllBoards, getBoard, getCurrentBoard, setBoardSlot, updateBoard } from "@services/boards";
 import { getService } from "@services/services";
+import { updateSocket } from "@services/socket";
 import { Router } from "express";
-import { Server } from "socket.io";
 
 export const boardsRouter = Router();
 
 const getBoardRepository = () => getService<BoardRepository>('board');
-async function updateSocket(board: Board) {
-    const contextRepository = getService<ContextRepository>('context');
-    const context = new MyDeckContext(contextRepository);
-    const currentBoardId = await context.getCurrentBoard();
-    if (currentBoardId === board.id) {
-        const socket = getService<Server>("socket");
-        socket.emit("board", board);
-    }
-}
 
 // List boards
 boardsRouter.get('', async (req, res) => {

@@ -1,4 +1,5 @@
 import { getCurrentBoard } from "@services/boards";
+import { executeCommand } from "@services/commands";
 import { getService, registerService } from "@services/services";
 import { Server } from "http";
 import * as socketio from "socket.io";
@@ -17,6 +18,9 @@ export const socket = (server: Server, allowedOrigins: string[]) => {
         console.log('a user connected');
         const currentBoard = await getCurrentBoard(getService('context'), getService('board'));
         socket.emit("board", currentBoard);
+        socket.on("execute", async data => {
+            await executeCommand(data);
+        });
         socket.on('disconnect', () => {
             console.log('user disconnected');
         });
