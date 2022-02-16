@@ -1,4 +1,6 @@
+import { MyDeckContext } from "@commands/my-deck/context";
 import { BoardRepository } from "@interfaces/board.repository";
+import { ContextRepository } from "@interfaces/context.repository";
 import { Slot } from "@models/board";
 import { Button } from "@models/button";
 import { emptyBoard } from "@utils/empty-board";
@@ -27,4 +29,10 @@ export async function setBoardSlot(boardRepository: BoardRepository, boardId: st
     };
 
     return boardRepository.setSlot(boardId, slotId, slot);
+}
+
+export async function getCurrentBoard(contextRepository: ContextRepository, boardRepository: BoardRepository) {
+    const context = new MyDeckContext(contextRepository);
+    const currentBoardId = await context.getCurrentBoard();
+    return getBoard(boardRepository, currentBoardId);
 }

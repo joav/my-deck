@@ -1,28 +1,31 @@
-// import  { config } from "dotenv";
+import { Server } from "http";
 import express from "express";
-// import { ApolloServer } from 'apollo-server-express';
-// import depthLimit from 'graphql-depth-limit';
 import compression from 'compression';
 import winston from 'winston';
+import cors from "cors";
 import expressWinston from 'express-winston';
+
 import { router } from "./routes";
 // import { InMemoryBoardRepository } from "./implementations/in-memory/board.repository";
 import { registerMultipleServices, registerService } from "@services/services";
-import cors from "cors";
 // import { InMemoryContextRepository } from "./implementations/in-memory/context.repository";
 // import { InMemoryButtonRepository } from "./implementations/in-memory/button.repository";
 import { db } from "./infrastructure/sqlite/db";
 import { SqliteBoardRepository } from "./implementations/persitence/sqlite/board.repository";
 import { SqliteButtonRepository } from "./implementations/persitence/sqlite/button.repository";
 import { SqliteContextRepository } from "./implementations/persitence/sqlite/context.repository";
-// import db from './db';
-// import schema from './schema';
-// import Auth from './Auth'
+import { socket } from "./socket";
 
 const PORT = process.env.PORT || 3000;
+const allowedOrigins = [
+    'http://localhost:3001',
+    'http://localhost:3002',
+];
 
-// config();
-// db();
+const app = express();
+const server = new Server(app);
+
+socket(server, allowedOrigins);
 
 registerService('sqlite', db);
 
@@ -41,12 +44,6 @@ registerMultipleServices([
     },
 ]);
 
-const allowedOrigins = [
-    'http://localhost:3001',
-    'http://localhost:3002',
-];
-
-const app = express();
 app.use(cors({
     origin: allowedOrigins
 }));
@@ -82,4 +79,4 @@ app.use(expressWinston.errorLogger({
     )
 }));
 
-app.listen(PORT, () => console.log(`MyDeck Server running on http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`MyDeck Server running on http://localhost:${PORT}`));

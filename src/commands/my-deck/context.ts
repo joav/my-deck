@@ -1,28 +1,24 @@
 import { ROOT_ID } from "@utils/root-id";
 import { BaseContext } from "../shared/base.context";
-
-const MY_DECK_BASE_KEY = 'my-deck';
-const HISTORY = `${MY_DECK_BASE_KEY}__history`;
-const CURRENT = `${MY_DECK_BASE_KEY}__current`;
-const PREVIOUS = `${MY_DECK_BASE_KEY}__previous`;
+import { MyDeckContextVars } from "./my-deck-context-vars";
 
 export class MyDeckContext extends BaseContext {
     async setCurrentBoard(boardId: string) {
-        await this.contextRepository.set(CURRENT, boardId);
+        await this.contextRepository.set(MyDeckContextVars.CURRENT, boardId);
     }
 
     async getCurrentBoard() {
-        let current = await this.contextRepository.get(CURRENT);
+        let current = await this.contextRepository.get(MyDeckContextVars.CURRENT);
         if (!current) current = ROOT_ID;
         return current;
     }
 
     async setHistory(history: string[]) {
-        await this.contextRepository.setFromJson(PREVIOUS, history);
+        await this.contextRepository.setFromJson(MyDeckContextVars.HISTORY, history);
     }
 
     async getHistory() {
-        let history = await this.contextRepository.getFromJson<string[]>(HISTORY);
+        let history = await this.contextRepository.getFromJson<string[]>(MyDeckContextVars.HISTORY);
         if (!history) history = [ROOT_ID];
         return history;
     }
