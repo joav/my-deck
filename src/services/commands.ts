@@ -2,8 +2,7 @@ import { BaseCommand } from "@commands/shared/base.command";
 import { CommandsService } from "@commands/utils/commands.service";
 import { BoardRepository } from "@interfaces/board.repository";
 import { ContextRepository } from "@interfaces/context.repository";
-import { Board, Slot } from "@models/board";
-import { emptyBoard } from "@utils/empty-board";
+import { Slot } from "@models/board";
 import { getCurrentBoard, setSlotState } from "./boards";
 import { getService } from "./services";
 import { updateSocket } from "./socket";
@@ -23,13 +22,10 @@ export async function executeCommand({
         console.log(`Execute slot: ${boardId} - ${slotId} - ${slot.button.name}`);
         const boardRepository = getService<BoardRepository>('board');
         let lastBoardId = boardId;
-        let lastBoard: Board = emptyBoard("Empty", boardId);
         try {
             const contextRepository = getService<ContextRepository>('context');
             const boardIn = await setSlotState(boardRepository, boardId, slotId, slot.button, "EXECUTING");
             await updateSocket(boardIn);
-
-            lastBoard = boardIn;
             
             const commandsData = await CommandsService.getCommandsData();
             const commands: {[key: string]: BaseCommand} = {}
@@ -48,7 +44,6 @@ export async function executeCommand({
                     const currentBoard = await getCurrentBoard(contextRepository, boardRepository);
                     if (currentBoard) {
                         lastBoardId = currentBoard.id;
-                        lastBoard = currentBoard;
                         await updateSocket(currentBoard);
                     }
                 }
@@ -58,9 +53,9 @@ export async function executeCommand({
             console.log(error);
         }
 
-        await setSlotState(boardRepository, boardId, slotId, slot.button, "FULL");
+        const boardOut = await setSlotState(boardRepository, boardId, slotId, slot.button, "FULL");
         if (boardId === lastBoardId) {
-            await updateSocket(lastBoard);
+            await updateSocket(boardOut);
         }
     }
 }
