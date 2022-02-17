@@ -17,10 +17,8 @@ import { SqliteContextRepository } from "./implementations/persitence/sqlite/con
 import { socket } from "./socket";
 
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = [
-    'http://localhost:3001',
-    'http://localhost:3002',
-];
+const HOST = process.env.HOST || "0.0.0.0";
+const allowedOrigins = '*';
 
 const app = express();
 const server = new Server(app);
@@ -79,4 +77,5 @@ app.use(expressWinston.errorLogger({
     )
 }));
 
-server.listen(PORT, () => console.log(`MyDeck Server running on http://localhost:${PORT}`));
+// @ts-ignore
+server.listen(PORT, HOST, () => console.log(`MyDeck Server running on http://${HOST}:${PORT}`));

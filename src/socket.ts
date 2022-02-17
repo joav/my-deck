@@ -4,7 +4,7 @@ import { getService, registerService } from "@services/services";
 import { Server } from "http";
 import * as socketio from "socket.io";
 
-export const socket = (server: Server, allowedOrigins: string[]) => {
+export const socket = (server: Server, allowedOrigins: string | string[]) => {
     const io = new socketio.Server(server, {
         cors: {
             origin: allowedOrigins,
