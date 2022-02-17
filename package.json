@@ -2,7 +2,7 @@
   "name": "my-deck",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "public/main.js",
   "nodemonConfig": {
     "ignore": [
       "**/*.test.ts",
@@ -22,7 +22,8 @@
     "build": "tsc --project tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./server && npm run cp-commands && npm run cp-db",
     "cp-commands": "cp-cli ./src/commands/commands.json ./server/commands/commands.json",
     "cp-db": "cp-cli ./src/infrastructure/sqlite/my-deck.db ./server/infrastructure/sqlite/my-deck.db",
-    "install-module": "ts-node --project ./tsconfig.json -r tsconfig-paths/register"
+    "install-module": "ts-node --project ./tsconfig.json -r tsconfig-paths/register",
+    "start:app": "electron ./public/main.js"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +40,7 @@
     "winston": "^3.5.1"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
@@ -47,6 +49,7 @@
     "@types/sqlite3": "^3.1.8",
     "@types/uniqid": "^5.3.2",
     "cp-cli": "^2.0.0",
+    "electron": "^17.0.1",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
