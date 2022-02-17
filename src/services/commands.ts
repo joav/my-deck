@@ -1,4 +1,4 @@
-import { BaseCommand } from "@commands/shared/base.command";
+import { BaseCommand, ExecuteParams } from "@commands/shared/base.command";
 import { CommandsService } from "@commands/utils/commands.service";
 import { BoardRepository } from "@interfaces/board.repository";
 import { ContextRepository } from "@interfaces/context.repository";
@@ -28,7 +28,8 @@ export async function executeCommand({
             await updateSocket(boardIn);
             
             const commandsData = await CommandsService.getCommandsData();
-            const commands: {[key: string]: BaseCommand} = {}
+            const commands: {[key: string]: BaseCommand} = {};
+            let step = 0;
             for (const action of slot.button.steps) {
                 if (commandsData.commands[action.commandId]) {
                     const [groupId, commandId] = action.commandId.split('__');
@@ -39,7 +40,9 @@ export async function executeCommand({
                     }
 
                     console.log(`Executing command: ${action.commandId}`);
-                    await command.execute(action.params);
+                    const executeContext = {boardId, slotId, slot, step};
+                    const params = action.params?{...action.params, executeContext}:{executeContext};
+                    await command.execute(params);
                     console.log(`Execution complete`);
                     const currentBoard = await getCurrentBoard(contextRepository, boardRepository);
                     if (currentBoard) {
@@ -47,6 +50,7 @@ export async function executeCommand({
                         await updateSocket(currentBoard);
                     }
                 }
+                step++;
             }
         } catch (error) {
             console.log("Execute command error: ", (error as any).message);

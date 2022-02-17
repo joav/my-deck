@@ -4,10 +4,10 @@ import { Command } from "@models/command";
 import { ParamsData } from "@models/params-data";
 import { getService } from "@services/services";
 import { ROOT_ID } from "@utils/root-id";
-import { BaseCommand } from "../../shared/base.command";
+import { BaseCommand, ExecuteParams } from "../../shared/base.command";
 import { MyDeckContext } from "../context";
 
-type ToSpecificParams = {
+type ToSpecificParams = ExecuteParams & {
     boardId: string;
 };
 

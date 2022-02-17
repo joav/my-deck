@@ -1,7 +1,7 @@
 import { Command } from "@models/command";
-import { BaseCommand } from "../../shared/base.command";
+import { BaseCommand, ExecuteParams } from "../../shared/base.command";
 
-type DelayParams = {
+type DelayParams = ExecuteParams & {
     delay: number;
 };
 
