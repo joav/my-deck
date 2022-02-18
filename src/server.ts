@@ -14,6 +14,7 @@ import { db } from "./infrastructure/sqlite/db";
 import { SqliteBoardRepository } from "./implementations/persitence/sqlite/board.repository";
 import { SqliteButtonRepository } from "./implementations/persitence/sqlite/button.repository";
 import { SqliteContextRepository } from "./implementations/persitence/sqlite/context.repository";
+import { SqliteFileRepository } from "./implementations/persitence/sqlite/file.repository";
 import { socket } from "./socket";
 
 const PORT = process.env.PORT || 3000;
@@ -39,6 +40,10 @@ registerMultipleServices([
     {
         key: 'button',
         service: new SqliteButtonRepository()
+    },
+    {
+        key: 'file',
+        service: new SqliteFileRepository()
     },
 ]);
 
