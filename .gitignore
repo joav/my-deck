@@ -1,4 +1,5 @@
 node_modules
 server
 src/infrastructure/sqlite/my-deck.db
-./files
+files/
+bin
