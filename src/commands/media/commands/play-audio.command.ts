@@ -15,6 +15,7 @@ export class PlayAudioCommand extends BaseCommand {
     static definition: Command = {
         id: "play-audio",
         name: "Reproducir Sonido",
+        showCommand: true,
         defaultParams: {
             audio: ""
         },
