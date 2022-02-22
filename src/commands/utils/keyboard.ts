@@ -12,7 +12,7 @@ export async function hitHotkey(key: string, modifier1?: string, modifier2?: str
             } else if (modifier1 && modifier2) {
                 await exec(`osascript -e "tell app \\"System Events\\" to key code ${key} using {${modifier1} down, ${modifier2} down}"`);
             } else if (modifier1) {
-                await exec(`osascript -e "$tell app \\"System Events\\" to key code ${key} using ${modifier1} down"`);
+                await exec(`osascript -e "tell app \\"System Events\\" to key code ${key} using ${modifier1} down"`);
             } else {
                 await exec(`osascript -e "tell app \\"System Events\\" to key code ${key}"`);
             }
