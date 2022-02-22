@@ -8,13 +8,13 @@ export async function hitHotkey(key: string, modifier1?: string, modifier2?: str
     try {
         if (os.type() === 'Darwin') {
             if (modifier1 && modifier2 && modifier3) {
-                await exec(`Script="tell app \\"System Events\\" to key code ${key} using {${modifier1} down, ${modifier2} down, ${modifier3} down}" osascript -e "$Script"`);
+                await exec(`osascript -e "tell app \\"System Events\\" to key code ${key} using {${modifier1} down, ${modifier2} down, ${modifier3} down}"`);
             } else if (modifier1 && modifier2) {
-                await exec(`Script="tell app \\"System Events\\" to key code ${key} using {${modifier1} down, ${modifier2} down}" osascript -e "$Script"`);
+                await exec(`osascript -e "tell app \\"System Events\\" to key code ${key} using {${modifier1} down, ${modifier2} down}"`);
             } else if (modifier1) {
-                await exec(`Script="tell app \\"System Events\\" to key code ${key} using ${modifier1} down" osascript -e "$Script"`);
+                await exec(`osascript -e "$tell app \\"System Events\\" to key code ${key} using ${modifier1} down"`);
             } else {
-                await exec(`Script="tell app \\"System Events\\" to key code ${key}" osascript -e "$Script"`);
+                await exec(`osascript -e "tell app \\"System Events\\" to key code ${key}"`);
             }
         } else {
             if (modifier1 && modifier2 && modifier3) {
